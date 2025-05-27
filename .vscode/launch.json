@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Vending Machine",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/vendingmachine.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": true,
+      "preLaunchTask": "Build and Run in New Window",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
