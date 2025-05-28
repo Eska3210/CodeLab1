@@ -3,10 +3,15 @@
 #include <iomanip>    // For formatting output (e.g., setprecision)
 #include <string>     // For using the string type
 #include <sstream>    // For stringstream (used to convert string input to integers)
-#include <cstdlib>    // For system() function to run console commands
+
+#ifdef _WIN32
+#include <cstdlib>    // For system() function (Windows only)
+#endif
 
 int main() {
-    system("chcp 65001");  // Set console character encoding to UTF-8 (for pound sign £)
+#ifdef _WIN32
+    system("chcp 65001");  // Set console character encoding to UTF-8 (only on Windows)
+#endif
 
     std::string input;     // To store user input as a string
     int choice = 0;        // To store the menu selection
@@ -16,7 +21,7 @@ int main() {
     // Start infinite loop for the vending menu
     while (true) {
         // Display menu
-        std::cout << "Hello and Welcome to the Vending Machine, ensuring you stay hydrated and fed \n";
+        std::cout << "Hello and Welcome to the Vending Machine, ensuring you stay hydrated and fed\n";
         std::cout << "1. Water       - £1.00\n";
         std::cout << "2. Grapefruit  - £1.50\n";
         std::cout << "3. Crisps      - £1.20\n";
@@ -25,8 +30,8 @@ int main() {
 
         // Prompt user for selection
         std::cout << "Please select an item (1-5): ";
-        std::getline(std::cin, input);  // Get input as string to handle errors gracefully
-        std::stringstream(input) >> choice;  // Convert input to integer
+        std::getline(std::cin, input);               // Get input as string to handle errors gracefully
+        std::stringstream(input) >> choice;          // Convert input to integer
 
         // Exit condition
         if (choice == 5) {
