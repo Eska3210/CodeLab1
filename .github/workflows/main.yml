@@ -14,10 +14,15 @@ jobs:
       - name: Compile the C++ program
         run: g++ vendingmachine.cpp -o vendingmachine
 
-      - name: Run the program with simulated inputs
+      - name: Run the program with simulated input and save output
         run: |
-          echo -e "1\n2\n5" | timeout 30s ./vendingmachine || echo "Program timed out or exited with error"
+          echo -e "1\n2\n5" | timeout 30s ./vendingmachine > program_output.log || echo "Program timed out or exited with error"
 
-      - name: Finished
-        run: echo "GitHub Actions completed the run"
+      - name: Upload output log as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: vendingmachine-output-log
+          path: program_output.log
 
+      - name: Done
+        run: echo "Program finished. Check artifact log for output."
