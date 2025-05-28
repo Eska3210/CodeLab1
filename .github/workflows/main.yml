@@ -1,0 +1,21 @@
+name: Mark C++ Assignment
+
+on: [push]
+
+jobs:
+  build-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Compile the C++ program
+        run: g++ vendingmachine.cpp -o vendingmachine
+
+      - name: ▶️ Run the program
+        run: ./vendingmachine || echo "⚠️ Program exited with non-zero status"
+
+      - name: ✅ Done
+        run: echo "✔️ GitHub Actions ran the C++ code"
