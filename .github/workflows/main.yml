@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 2
 
     steps:
       - name: Checkout code
@@ -14,10 +14,8 @@ jobs:
       - name: Compile the C++ program
         run: g++ vendingmachine.cpp -o vendingmachine
 
-      - name: Run the program with timeout
-        run: timeout 5s ./vendingmachine || echo "Program timed out or exited with error"
+      - name: Run the program with simulated input
+        run: echo -e "3\n5" | timeout 5s ./vendingmachine || echo "Program timed out or exited with error"
 
       - name: Finished
         run: echo "GitHub Actions completed the run"
-
-
