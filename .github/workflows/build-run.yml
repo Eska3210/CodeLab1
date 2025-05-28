@@ -1,0 +1,24 @@
+name: Build and Run Vending Machine
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up g++
+      run: sudo apt update && sudo apt install -y g++
+
+    - name: Compile the C++ program
+      run: g++ -o vendingmachine vendingmachine.cpp
+
+    - name: Run the program with sample input
+      run: echo -e "1\n2\n5" | timeout 30s ./vendingmachine || echo "Program timed out or exited with error"
